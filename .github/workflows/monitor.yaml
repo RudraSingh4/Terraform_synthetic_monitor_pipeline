@@ -25,8 +25,8 @@ env:
 jobs:
   Test-monitor:
     runs-on : ubuntu-latest
-    # strategy :
-    #   matrix : { dir: ['Test-monitor', 'Test2-Monitor'] }
+    strategy :
+      matrix : { dir: ['Test-monitor', 'Test2-Monitor'] }
     steps:
       - name: "Setup - Checkout"
         uses: actions/checkout@v2.1.0
@@ -40,68 +40,68 @@ jobs:
             aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
             aws-region: ${{ env.aws_region }}
 
-      - name: Initialize Terraform
-        run: terraform init
-        working-directory: Test-monitor
+      # - name: Initialize Terraform
+      #   run: terraform init
+      #   working-directory: Test-monitor
         
-      - name: Plan Terraform Changes
-        run: terraform plan
-        working-directory: Test-monitor
-        
-      - name: Apply Terraform Changes
-        run: |
-          if (github.event.input.options == 'apply') ; then 
-            terraform apply -auto-approve
-          else
-            terraform destroy -auto-approve
-          fi
-        working-directory: Test-monitor  
-
-  Test2-Monitor:
-    runs-on : ubuntu-latest
-    # strategy :
-    #   matrix : { dir: ['Test-monitor', 'Test2-Monitor'] }
-    steps:
-      - name: "Setup - Checkout"
-        uses: actions/checkout@v2.1.0
-      - name: "Setup - Terraform CLI"
-        uses: hashicorp/setup-terraform@v1
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-            aws-region: ${{ env.aws_region }}
-
-      - name: Initialize Terraform
-        run: terraform init
-        working-directory: Test2-Monitor
-        
-      - name: Plan Terraform Changes
-        run: terraform plan
-        working-directory: Test2-Monitor
-        
-      - name: Apply Terraform Changes
-        run: |
-          if (github.event.input.options == 'apply') ; then 
-            terraform apply -auto-approve
-          else
-            terraform destroy -auto-approve
-          fi
-        working-directory: Test2-Monitor
-        
-# -----------------------------
       # - name: Plan Terraform Changes
+      #   run: terraform plan
+      #   working-directory: Test-monitor
+        
+      # - name: Apply Terraform Changes
       #   run: |
-      #     terraform init
-      #     terraform plan
       #     if (github.event.input.options == 'apply') ; then 
       #       terraform apply -auto-approve
       #     else
       #       terraform destroy -auto-approve
       #     fi
-      #   working-directory: ${{ matrix.dir }}
+      #   working-directory: Test-monitor  
+
+  # Test2-Monitor:
+  #   runs-on : ubuntu-latest
+  #   # strategy :
+  #   #   matrix : { dir: ['Test-monitor', 'Test2-Monitor'] }
+  #   steps:
+  #     - name: "Setup - Checkout"
+  #       uses: actions/checkout@v2.1.0
+  #     - name: "Setup - Terraform CLI"
+  #       uses: hashicorp/setup-terraform@v1
+  #     - name: Configure AWS Credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+  #           aws-region: ${{ env.aws_region }}
+
+  #     - name: Initialize Terraform
+  #       run: terraform init
+  #       working-directory: Test2-Monitor
+        
+  #     - name: Plan Terraform Changes
+  #       run: terraform plan
+  #       working-directory: Test2-Monitor
+        
+  #     - name: Apply Terraform Changes
+  #       run: |
+  #         if (github.event.input.options == 'apply') ; then 
+  #           terraform apply -auto-approve
+  #         else
+  #           terraform destroy -auto-approve
+  #         fi
+  #       working-directory: Test2-Monitor
+        
+# -----------------------------
+      - name: Plan Terraform Changes
+        run: |
+          terraform init
+          terraform plan
+          if (github.event.input.options == 'apply') ; then 
+            terraform apply -auto-approve
+          else
+            terraform destroy -auto-approve
+          fi
+        working-directory: ${{ matrix.dir }}
         
 # -----------------------------
 
