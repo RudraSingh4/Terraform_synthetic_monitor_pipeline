@@ -60,12 +60,12 @@ jobs:
         run: |
           terraform init
           terraform plan
-          if (github.event.input.options == 'apply') ; then 
-            terraform apply -auto-approve
-          else
-            terraform destroy -auto-approve
-          fi
-        working-directory: Test-monitor
+        # if (github.event.input.options == 'apply') ; then 
+          #   terraform apply -auto-approve
+          # else
+          #   terraform destroy -auto-approve
+          # fi
+        working-directory: [Test-monitor , Test2-monitor]
         
 # -----------------------------
 
