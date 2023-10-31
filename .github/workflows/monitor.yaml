@@ -38,25 +38,36 @@ jobs:
             aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
             aws-region: ${{ env.aws_region }}
 
-      - name: Initialize Terraform
-        run: terraform init
-        working-directory: Test-monitor
-        working-directory: Test2-monitor
-
+      # - name: Initialize Terraform
+      #   run: terraform init
+      #   working-directory: Test-monitor
+        
+      # - name: Plan Terraform Changes
+      #   run: terraform plan
+      #   working-directory: Test-monitor
+        
+      # - name: Apply Terraform Changes
+      #   run: |
+      #     if (github.event.input.options == 'apply') ; then 
+      #       terraform apply -auto-approve
+      #     else
+      #       terraform destroy -auto-approve
+      #     fi
+      #   working-directory: Test-monitor  
+        
+# -----------------------------
       - name: Plan Terraform Changes
-        run: terraform plan
-        working-directory: Test-monitor
-        working-directory: Test2-monitor
-      - name: Apply Terraform Changes
         run: |
+          terraform init
+          terraform plan
           if (github.event.input.options == 'apply') ; then 
             terraform apply -auto-approve
           else
             terraform destroy -auto-approve
           fi
-        working-directory: Test-monitor  
-        working-directory: Test2-monitor
-
+        working-directory: Test-monitor
+        
+# -----------------------------
 
         
       # - name: Initialize Terraform
