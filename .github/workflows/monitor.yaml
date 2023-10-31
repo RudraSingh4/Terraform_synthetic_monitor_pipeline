@@ -65,7 +65,7 @@ jobs:
           # else
           #   terraform destroy -auto-approve
           # fi
-        working-directory: [Test-monitor , Test2-monitor]
+        working-directory: [Test-monitor, Test2-monitor]
         
 # -----------------------------
 
