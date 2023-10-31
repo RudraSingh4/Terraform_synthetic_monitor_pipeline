@@ -41,10 +41,12 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
         working-directory: Test-monitor
+        working-directory: Test2-monitor
 
       - name: Plan Terraform Changes
         run: terraform plan
         working-directory: Test-monitor
+        working-directory: Test2-monitor
       - name: Apply Terraform Changes
         run: |
           if (github.event.input.options == 'apply') ; then 
@@ -53,23 +55,25 @@ jobs:
             terraform destroy -auto-approve
           fi
         working-directory: Test-monitor  
+        working-directory: Test2-monitor
+
 
         
-      - name: Initialize Terraform
-        run: terraform init
-        working-directory: Test2-monitor
+      # - name: Initialize Terraform
+      #   run: terraform init
+      #   working-directory: Test2-monitor
 
-      - name: Plan Terraform Changes
-        run: terraform plan
-        working-directory: Test2-monitor
-      - name: Apply Terraform Changes
-        run: |
-          if (github.event.input.options == 'apply') ; then 
-            terraform apply -auto-approve
-          else
-            terraform destroy -auto-approve
-          fi
-        working-directory: Test2-monitor
+      # - name: Plan Terraform Changes
+      #   run: terraform plan
+      #   working-directory: Test2-monitor
+      # - name: Apply Terraform Changes
+      #   run: |
+      #     if (github.event.input.options == 'apply') ; then 
+      #       terraform apply -auto-approve
+      #     else
+      #       terraform destroy -auto-approve
+      #     fi
+      #   working-directory: Test2-monitor
              
 
 
