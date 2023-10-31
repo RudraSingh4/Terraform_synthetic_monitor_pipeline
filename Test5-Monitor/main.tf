@@ -2,7 +2,7 @@ resource "newrelic_synthetics_script_monitor" "monitor" {
   for_each = { for i in range(var.monitor_count5) : i => {} }
 
   status                                  = "DISABLED"
-  name                                    = "LoadTest-synthetic-monitor-${each.key}}"
+  name                                    = "LoadTest-synthetic-monitor5-${each.key}}"
   type                                    = "SCRIPT_BROWSER"
   locations_public                        = ["US_EAST_1", "US_WEST_1", "EU_WEST_2", "AP_SOUTHEAST_2", "AP_SOUTHEAST_1", "AP_NORTHEAST_1"]
   period                                  = "EVERY_12_HOURS"
