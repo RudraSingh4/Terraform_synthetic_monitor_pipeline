@@ -36,7 +36,7 @@ jobs:
           for dir in Test-monitor Test2-Monitor; do
             cd $dir
             terraform state push terraform.tfstate
-            aws s3 cp terraform.tfstate s3://your-s3-bucket-name/$dir/terraform.tfstate
+            aws s3 cp terraform.tfstate s3://workflow-bucket-synthetic-monitor/$dir/terraform.tfstate
             cd ..
           done
         env:

@@ -1,4 +1,4 @@
 variable "monitor_count1"{
     type = any
-    default = 25
+    default = 2
 }
