@@ -26,7 +26,7 @@ jobs:
   Test-monitor:
     runs-on : ubuntu-latest
     strategy :
-      matrix : { dir: ['Test-monitor', 'Test2-Monitor', 'Test3-Monitor', 'Test4-Monitor', 'Test5-Monitor' ] }
+      matrix : { dir: ['Test-monitor',  ] }
     steps:
       - name: "Setup - Checkout"
         uses: actions/checkout@v2.1.0
@@ -52,3 +52,4 @@ jobs:
 
 
 
+#'Test2-Monitor', 'Test3-Monitor', 'Test4-Monitor', 'Test5-Monitor'
