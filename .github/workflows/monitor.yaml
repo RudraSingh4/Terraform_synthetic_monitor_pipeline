@@ -8,7 +8,6 @@ on:
         default: 'apply'
         options:
           - 'apply'
-          - 'destroy'
 env:
   BUCKET: workflow-bucket-synthetic-monitor
   TFSTATE_FILE: terraform.tfstate
@@ -44,11 +43,7 @@ jobs:
         run: |
           terraform init
           terraform plan
-          if (github.event.input.options == 'apply') ; then 
-            terraform apply -auto-approve
-          else
-            terraform destroy -auto-approve
-          fi
+          terraform apply -auto-approve
         working-directory: ${{ matrix.dir }}
         
 
