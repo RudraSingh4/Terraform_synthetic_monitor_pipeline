@@ -1,4 +1,4 @@
-name: applying
+name: Destroy
 on: 
   workflow_dispatch:
     inputs:
@@ -7,7 +7,7 @@ on:
         required: true
         default: 'apply'
         options:
-          - 'apply'
+          - 'destroy'
 env:
 # #   BUCKET: test-bucket-00006
 # #   TFSTATE_FILE: terraform.tfstate
@@ -43,36 +43,5 @@ jobs:
         run: |
           terraform init
           terraform plan
-          terraform apply -auto-approve
+          terraform destroy -auto-approve
         working-directory: ${{ matrix.dir }}
-        
-# -----------------------------
-
-        
-      # - name: Initialize Terraform
-      #   run: terraform init
-      #   working-directory: Test2-monitor
-
-      # - name: Plan Terraform Changes
-      #   run: terraform plan
-      #   working-directory: Test2-monitor
-      # - name: Apply Terraform Changes
-      #   run: |
-      #     if (github.event.input.options == 'apply') ; then 
-      #       terraform apply -auto-approve
-      #     else
-      #       terraform destroy -auto-approve
-      #     fi
-      #   working-directory: Test2-monitor
-             
-
-
-      # - name: terraform init
-      #   run: terraform init -reconfigure -backend-config="bucket=${{ env.BUCKET}}" -backend-config="key=${{ env.TFSTATE_FILE }}" -backend-config="region=${{ env.aws_region }}"
-
-      # - name: terraform plan
-      #   run: terraform plan
-
-      # - name: ${{github.event.inputs.action}}
-      #   run: terraform ${{github.event.inputs.action}} -auto-approve
-
