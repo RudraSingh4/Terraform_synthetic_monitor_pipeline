@@ -1,55 +1,55 @@
-# name: applying
-# on: 
-#   workflow_dispatch:
-#     inputs:
-#       action:
-#         description: 'creating newrelic'
-#         required: true
-#         default: 'apply'
-#         options:
-#           - 'apply'
-#           - 'destroy'
-# env:
-#   BUCKET: workflow-bucket-synthetic-monitor
-#   TFSTATE_FILE: terraform.tfstate
-#   aws_region: us-east-1
-# #   pull_request:
-# #     branches:
-# #       - main
-# #   push:
-# #     branches:
-# #       - main
+name: applying
+on: 
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'creating newrelic'
+        required: true
+        default: 'apply'
+        options:
+          - 'apply'
+          - 'destroy'
+env:
+  BUCKET: workflow-bucket-synthetic-monitor
+  TFSTATE_FILE: terraform.tfstate
+  aws_region: us-east-1
+#   pull_request:
+#     branches:
+#       - main
+  push:
+    branches:
+      - main
   
  
         
-# jobs:
-#   Test-monitor:
-#     runs-on : ubuntu-latest
-#     strategy :
-#       matrix : { dir: ['Test-monitor', 'Test2-Monitor'  ] }
-#     steps:
-#       - name: "Setup - Checkout"
-#         uses: actions/checkout@v2.1.0
-#       - name: "Setup - Terraform CLI"
-#         uses: hashicorp/setup-terraform@v1
-#       - name: Configure AWS Credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#             aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-#             aws-region: ${{ env.aws_region }}
+jobs:
+  Test-monitor:
+    runs-on : ubuntu-latest
+    strategy :
+      matrix : { dir: ['Test-monitor', 'Test2-Monitor'  ] }
+    steps:
+      - name: "Setup - Checkout"
+        uses: actions/checkout@v2.1.0
+      - name: "Setup - Terraform CLI"
+        uses: hashicorp/setup-terraform@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+            aws-region: ${{ env.aws_region }}
 
-#       - name: Plan Terraform Changes
-#         run: |
-#           terraform init -reconfigure -backend-config="bucket=${{env.BUCKET}}" -backend-config="key=${{env.TFSTATE_FILE}}"
-#           terraform plan
-#           terraform apply -auto-approve
-#         working-directory: ${{ matrix.dir }}
+      - name: Plan Terraform Changes
+        run: |
+          terraform init -reconfigure -backend-config="bucket=${{env.BUCKET}}" -backend-config="key=${{env.TFSTATE_FILE}}"
+          terraform plan
+          terraform apply -auto-approve
+        working-directory: ${{ matrix.dir }}
         
 
        
 
 
 
-# #'Test2-Monitor', 'Test3-Monitor', 'Test4-Monitor', 'Test5-Monitor'
+#'Test2-Monitor', 'Test3-Monitor', 'Test4-Monitor', 'Test5-Monitor'

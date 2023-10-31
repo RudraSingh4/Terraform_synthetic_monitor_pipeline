@@ -1,44 +1,44 @@
-name: Terraform Deployment
+# name: Terraform Deployment
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  terraform:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+# jobs:
+#   terraform:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v2
 
-      - name: Set up AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: us-east-1  # Replace with your AWS region
+#       - name: Set up AWS CLI
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+#           aws-region: us-east-1  # Replace with your AWS region
 
-      - name: Terraform Init and Apply
-        run: |
-          for dir in Test-monitor Test2-Monitor; do
-            cd $dir
-            terraform init -backend-config="bucket=workflow-bucket-synthetic-monitor" -backend-config="key=$dir/terraform.tfstate"
-            terraform destroy -auto-approve
-            cd ..
-          done
-        env:
-          TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc
-          BUCKET: workflow-bucket-synthetic-monitor
-          TFSTATE_FILE: terraform.tfstate
-          aws_region: us-east-1
+#       - name: Terraform Init and Apply
+#         run: |
+#           for dir in Test-monitor Test2-Monitor; do
+#             cd $dir
+#             terraform init -backend-config="bucket=workflow-bucket-synthetic-monitor" -backend-config="key=$dir/terraform.tfstate"
+#             terraform destroy -auto-approve
+#             cd ..
+#           done
+#         env:
+#           TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc
+#           BUCKET: workflow-bucket-synthetic-monitor
+#           TFSTATE_FILE: terraform.tfstate
+#           aws_region: us-east-1
 
-      # - name: Store Terraform State in S3
-      #   run: |
-      #       terraform state push terraform.tfstate
-      #       aws s3 cp terraform.tfstate s3://workflow-bucket-synthetic-monitor/$dir/terraform.tfstate
-      #       working-directory: ${{ matrix.dir }}
-      #   env:
-      #     AWS_REGION: us-east-1  # Replace with your AWS region
-      #     TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc
+#       # - name: Store Terraform State in S3
+#       #   run: |
+#       #       terraform state push terraform.tfstate
+#       #       aws s3 cp terraform.tfstate s3://workflow-bucket-synthetic-monitor/$dir/terraform.tfstate
+#       #       working-directory: ${{ matrix.dir }}
+#       #   env:
+#       #     AWS_REGION: us-east-1  # Replace with your AWS region
+#       #     TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc
