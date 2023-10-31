@@ -25,7 +25,7 @@ jobs:
           for dir in Test-monitor Test2-Monitor; do
             cd $dir
             terraform init -backend-config="bucket=workflow-bucket-synthetic-monitor" -backend-config="key=$dir/terraform.tfstate"
-            terraform apply -auto-approve
+            terraform destroy -auto-approve
             cd ..
           done
         env:
