@@ -42,7 +42,7 @@ jobs:
 
       - name: Plan Terraform Changes
         run: |
-          terraform init
+          terraform init -reconfigure -backend-config="bucket=${{env.BUCKET}}" -backend-config="key=${{env.TFSTATE_FILE}}"
           terraform plan
           terraform apply -auto-approve
         working-directory: ${{ matrix.dir }}
