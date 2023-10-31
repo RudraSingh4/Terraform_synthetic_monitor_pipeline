@@ -9,16 +9,16 @@ on:
         options:
           - 'apply'
           - 'destroy'
-env:
-#   BUCKET: test-bucket-00006
-#   TFSTATE_FILE: terraform.tfstate
-#   aws_region: us-east-1
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+# env:
+# #   BUCKET: test-bucket-00006
+# #   TFSTATE_FILE: terraform.tfstate
+# #   aws_region: us-east-1
+#   pull_request:
+#     branches:
+#       - main
+#   push:
+#     branches:
+#       - main
   
  
         
@@ -40,14 +40,14 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init
-        working-directory: ./Test-monitor
+        working-directory: Test-monitor
 
       - name: Plan Terraform Changes
         run: terraform plan
-        working-directory: ./Test-monitor
+        working-directory: Test-monitor
       - name: Apply Terraform Changes
         run: terraform apply -auto-approve
-        working-directory: ./Test-monitor  
+        working-directory: Test-monitor  
              
 
 
