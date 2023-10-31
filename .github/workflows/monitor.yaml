@@ -47,11 +47,11 @@ jobs:
         working-directory: Test-monitor
       - name: Apply Terraform Changes
         run: |
-        if (github.event.input.options == 'apply') ; then 
-          terraform apply -auto-approve
-        else
-          terraform destroy -auto-approve
-        fi
+          if (github.event.input.options == 'apply') ; then 
+            terraform apply -auto-approve
+          else
+            terraform destroy -auto-approve
+          fi
         working-directory: Test-monitor  
              
 
