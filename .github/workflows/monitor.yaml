@@ -26,7 +26,7 @@ jobs:
   Test-monitor:
     runs-on : ubuntu-latest
     strategy :
-      matrix : { dir: ['Test-monitor' ] }
+      matrix : { dir: ['Test-monitor', 'Test2-Monitor' ] }
     steps:
       - name: "Setup - Checkout"
         uses: actions/checkout@v2.1.0
@@ -44,7 +44,7 @@ jobs:
         run: |
           terraform init
           terraform plan
-          terraform destroy -auto-approve
+          terraform apply -auto-approve
         working-directory: ${{ matrix.dir }}
         
 # -----------------------------
