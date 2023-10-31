@@ -44,7 +44,6 @@ jobs:
         run: |
           terraform init
           terraform plan
-          - name: Apply Terraform Changes
           if (github.event.input.options == 'apply') ; then 
             terraform apply -auto-approve
           else
