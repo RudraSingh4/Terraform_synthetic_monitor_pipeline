@@ -95,7 +95,7 @@ jobs:
         run: terraform destroy -auto-approve
         working-directory: Test7-Monitor
 
-        - name: Initialize Terraform
+      - name: Initialize Terraform
         run: terraform init
         working-directory: Test8-Monitor
 
