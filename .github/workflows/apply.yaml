@@ -1,4 +1,4 @@
-name: applying
+name: Destroy
 on: 
   workflow_dispatch:
     inputs:
