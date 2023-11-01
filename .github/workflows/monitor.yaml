@@ -8,7 +8,7 @@ on:
         default: 'apply'
         options:
           - 'apply'
-          - 'destroy'
+          - 'apply'
 env:
   BUCKET: workflow-bucket-synthetic-monitor
   TFSTATE_FILE: terraform.tfstate
@@ -76,6 +76,63 @@ jobs:
       - name: Apply Terraform Changes
         run: terraform apply -auto-approve
         working-directory: Test5-Monitor
+
+      
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: Test6-Monitor
+
+      - name: Apply Terraform Changes
+        run: terraform apply -auto-approve
+        working-directory: Test6-Monitor
+
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: Test7-Monitor
+
+      - name: Apply Terraform Changes
+        run: terraform apply -auto-approve
+        working-directory: Test7-Monitor
+
+        - name: Initialize Terraform
+        run: terraform init
+        working-directory: Test8-Monitor
+
+      - name: Apply Terraform Changes
+        run: terraform apply -auto-approve
+        working-directory: Test8-Monitor
+
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: Test9-Monitor
+
+      - name: Apply Terraform Changes
+        run: terraform apply -auto-approve
+        working-directory: Test9-Monitor
+
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: Test10-Monitor
+
+      - name: Apply Terraform Changes
+        run: terraform apply -auto-approve
+        working-directory: Test10-Monitor
+
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: Test11-Monitor
+
+      - name: Apply Terraform Changes
+        run: terraform apply -auto-approve
+        working-directory: Test11-Monitor
+
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: Test12-Monitor
+
+      - name: Apply Terraform Changes
+        run: terraform apply -auto-approve
+        working-directory: Test12-Monitor
 
 
        
