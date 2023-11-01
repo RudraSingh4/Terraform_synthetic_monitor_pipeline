@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "test-bucket-00006"
-    key    = "terraform.tfstate"
+    bucket = "workflow-bucket-synthetic-monitor"
+    key    = "Test12-Monitor.tfstate"
     region = "us-east-1"
   }
 }
