@@ -30,15 +30,15 @@
 #           done
 #         env:
 #           TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc
-#           BUCKET: workflow-bucket-synthetic-monitor
-#           TFSTATE_FILE: terraform.tfstate
-#           aws_region: us-east-1
 
-#       # - name: Store Terraform State in S3
-#       #   run: |
-#       #       terraform state push terraform.tfstate
-#       #       aws s3 cp terraform.tfstate s3://workflow-bucket-synthetic-monitor/$dir/terraform.tfstate
-#       #       working-directory: ${{ matrix.dir }}
-#       #   env:
-#       #     AWS_REGION: us-east-1  # Replace with your AWS region
-#       #     TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc
+#       - name: Store Terraform State in S3
+#         run: |
+#           for dir in Test-monitor Test2-Monitor; do
+#             cd $dir
+#             terraform state push terraform.tfstate
+#             aws s3 cp terraform.tfstate s3://workflow-bucket-synthetic-monitor/$dir/terraform.tfstate
+#             cd ..
+#           done
+#         env:
+#           AWS_REGION: us-east-1  # Replace with your AWS region
+#           TF_CLI_CONFIG_FILE: ${{ github.workspace }}/.terraformrc

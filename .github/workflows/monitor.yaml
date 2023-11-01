@@ -26,7 +26,7 @@ jobs:
   Test-monitor:
     runs-on : ubuntu-latest
     strategy :
-      matrix : { dir: ['Test-monitor', 'Test2-Monitor'  ] }
+      matrix : { dir: ['Test-monitor', 'Test2-Monitor','Test3-Monitor', 'Test4-Monitor', 'Test5-Monitor', 'Test6-Monitor'  ] }
     steps:
       - name: "Setup - Checkout"
         uses: actions/checkout@v2.1.0
@@ -42,14 +42,28 @@ jobs:
 
       - name: Plan Terraform Changes
         run: |
-          terraform init -reconfigure -backend-config="bucket=${{env.BUCKET}}" -backend-config="key=${{env.TFSTATE_FILE}}"
-          terraform plan
+          terraform init -reconfigure
           terraform apply -auto-approve
         working-directory: ${{ matrix.dir }}
+
+      # - name: Store Terraform State in S3
+      #   run: |
+      #       for dir in Test-monitor Test2-Monitor; do
+      #       cd $dir
+      #       terraform state push terraform.tfstate
+      #       aws s3 cp terraform.tfstate s3://workflow-bucket-synthetic-monitor/$dir/terraform.tfstate 
+      #       done
+
+      # if (github.event.inputs.action == "apply")
+          #   then
+          #     terraform apply -auto-approve
+          # else
+          #   terraform destroy -auto-approve
+          # fi
         
 
        
 
 
 
-#'Test2-Monitor', 'Test3-Monitor', 'Test4-Monitor', 'Test5-Monitor'
+#'Test2-Monitor', 
