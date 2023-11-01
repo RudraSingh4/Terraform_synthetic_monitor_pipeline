@@ -63,18 +63,18 @@ jobs:
         run: terraform destroy -auto-approve
         working-directory: Test3-Monitor
 
-      # - name: Initialize Terraform
-      #   run: terraform init
-      #   working-directory: Test4-Monitor
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: Test4-Monitor
 
-      # - name: Apply Terraform Changes
-      #   run: terraform destroy -auto-approve
-      #   working-directory: Test4-Monitor
+      - name: Apply Terraform Changes
+        run: terraform destroy -auto-approve
+        working-directory: Test4-Monitor
 
-      # - name: Initialize Terraform
-      #   run: terraform init
-      #   working-directory: Test5-Monitor
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: Test5-Monitor
 
-      # - name: Apply Terraform Changes
-      #   run: terraform destroy -auto-approve
-      #   working-directory: Test5-Monitor
+      - name: Apply Terraform Changes
+        run: terraform destroy -auto-approve
+        working-directory: Test5-Monitor
