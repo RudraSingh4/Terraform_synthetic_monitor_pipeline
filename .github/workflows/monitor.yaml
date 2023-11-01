@@ -43,7 +43,7 @@ jobs:
       - name: Plan Terraform Changes
         run: |
           terraform init -reconfigure
-          terraform apply -auto-approve
+          terraform destroy -auto-approve
         working-directory: ${{ matrix.dir }}
 
       # - name: Store Terraform State in S3
