@@ -8,7 +8,6 @@ on:
         default: 'apply'
         options:
           - 'apply'
-          - 'apply'
 env:
   BUCKET: workflow-bucket-synthetic-monitor
   TFSTATE_FILE: terraform.tfstate

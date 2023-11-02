@@ -5,9 +5,8 @@ on:
       action:
         description: 'creating newrelic'
         required: true
-        default: 'apply'
+        default: 'destroy'
         options:
-          - 'apply'
           - 'destroy'
 env:
   BUCKET: workflow-bucket-synthetic-monitor
